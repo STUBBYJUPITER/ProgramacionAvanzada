@@ -30,6 +30,10 @@
 		var score = 0;
 		var speed = 5;
 		var pause = false;
+		var juego=true;
+		var coin = new Image();
+		var duende = new Image();
+		var soundCoin=new Audio();
 		function start()
 		{
 			canvas = document.getElementById('mycanvas');
@@ -37,7 +41,13 @@
 			player1 = new Cuadrado(super_x,super_y,40,40,'purple');
 			player2 = new Cuadrado(RandomNumber(460),RandomNumber(460),40,40,'red');
             obstaculo1=new Cuadrado(250,250,200,25,"silver");
-			paint();
+			coin.src="coin.png";
+			duende.src="duende.png";
+			soundCoin.src='getCoin.mp3'
+			
+				paint();
+			
+			
 		} 
 		function paint()
 		{
@@ -48,18 +58,24 @@
 			ctx.fillStyle = "white";
 			ctx.fillText('SCORE:'+score+'  SPEED:'+speed,30,20);
 
-			player1.dibujar(ctx);
-			player2.dibujar(ctx);
+			//player1.dibujar(ctx);
+			ctx.drawImage(duende,player1.x,player1.y);
+			//player2.dibujar(ctx);
+			ctx.drawImage(coin,player2.x,player2.y);
             obstaculo1.dibujar(ctx);
-			if (pause) {
+			if(juego){
+				if (pause) {
 				
 				ctx.fillStyle = "rgba(0,0,0,0.5)"
 				ctx.fillRect(0,0,500,500)
 				ctx.fillStyle = "white";
 				ctx.fillText('P A U S E',230,230);
-			}else{
-				update();
+				}else{
+					update();
+				}
+
 			}
+			
 			
 		}
 		function update()
@@ -95,10 +111,24 @@
 				player2.y = RandomNumber(500);
 				score += 1;
 				speed += 1;
+				soundCoin.play();
 			}
 
             if(player1.se_tocan(obstaculo1)){
-                speed=0;
+				if (direction == 'right') {
+				player.x-=speed;
+			}
+			if (direction == 'left') {
+				player.x+=speed;
+			}
+			
+			if (direction == 'down') {
+				player1.y-=speed;
+			}
+			if (direction == 'up') {
+				player1.y+=speed;
+			}
+                
                 score-1;
                
                 
