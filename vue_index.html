@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+</head>
+<body>
+
+    <div id ="contenedor">
+        <h2>pro del salon</h2>
+        <ol>
+            <li v-for="alumno in palomilla">
+                {{alumno.name}}
+                {{alumno.role}}
+
+            </li>
+
+        </ol>
+        <fieldset>
+            <legend>
+                nuevo alumno
+            </legend>
+            <input type="text" v-model="a_name">
+            <input type="text" v-model="role">
+            <button @click="addpalomilla">
+                save
+            </button>
+        </fieldset>
+
+
+        <hr>
+        <fieldset>
+            <label >
+                ingrese su edad
+            </label>
+            <input type="" v-if="age" name="">
+            <h1 v-if="age>=18">
+                pasele a pistear
+            </h1>
+            <h1 v-else>
+                fuga pa la casa
+            </h1>
+
+        </fieldset>
+        <hr>
+        <h1>
+            {{name}}
+        </h1>
+        <p>
+            {{lastname}}
+        </p>
+        <form>
+            <fieldset>
+                <legend>Datos Personales</legend>
+                <input type = "text" v-model = "name" name = "">
+                <input type = "text" v-model = "lastname" lastname = "">
+
+                <button @click="saludar">
+                    saludar
+                </button>
+            </fieldset>
+            <fieldset>
+                <legend>Calculadora</legend>
+                <input type = "text" v-model = "num1" placeholder="valor1">
+                <input type = "text" v-model = "num2" placeholder="valor2">
+
+                <button @click="sumar">
+                    sumar
+                </button>
+                <h1>
+                    {{result}}
+                </h1>
+            </fieldset>
+        </form>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script type="text/javascript">
+        const {createApp} = Vue
+        const app = createApp({
+            data(){
+                return{
+                    name: 'Sergio',
+                    lastname: 'Galicia',
+                    num1: 0,
+                    num2:0,
+                    result:0,
+                    palomilla:[
+                        {name:'suzet',role:'backend'},
+                        {name:'dara',role:'fronend'}
+                       
+                    ],
+                    a_name:" ",
+                    role:" "
+                }
+            },
+            methods:{
+                saludar(){
+                    alert("Hola: "+this.name+" "+this.lastname)
+                },
+                sumar(){
+                    this.result=parseInt(this.num2)+ parseInt(this.num1)
+
+
+                },
+                addpalomilla(){
+                    this.palomilla.push({name:this.a_name,role:this.role})
+                    this.a_name=""
+                    this.role=""
+                }
+            }
+        }).mount('#contenedor')
+    </script>
+</body>
+</html>
