@@ -1,97 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue</title>
-</head>
-<body>
-
-    <div id ="contenedor">
-       <form action="">
-        <fieldset>
-            <legend>
-                Datos de acceso
-            </legend>
-            <br>
-
-            <label >
-                Correo electronico
-            </label>
-            <br>
-
-            <input type="text" v-model="email">
-            <br>
-            <br>
-            <label >
-                password
-            </label>
-            <br>
-            <input type="text" v-model="password">
-            <br>
-
-            <button @click="login" >
-                 Iniciar Sesion
-            </button>
-            <br>
-
-        </fieldset>
-
-       </form>
-       
-      
-    </div>
-
-    <script src="https://unpkg.com/vue@3"></script>
-    <script type="text/javascript">
-        const {createApp} = Vue
-       
-        const app = createApp({
-            data(){
-                return{
-                    //variables
-                    users: null,
-                    email:" ",
-                    password:" "
-
-                  
-                }
-            },
-            methods:{
-               //funciones
-               login(e){
-                var tmp_mail=this.email
-                var tmp_usert=this.password
-                var access = this.user.map(function(u){
-                    if(tmp_mail===u.email){
-                        if(tmp_psw===u.password){
-                            var temporal_usr = {
-                                name:u.name,
-                                username: u.username,
-                                email: u.email
-                            }
-                            localStorage.setItem('user',tmp_user)
-                            alert("datos correctos")
-                            window.location.href='users.html'
-                        }
-
-                    }
-               })
-            
-                e.preventDefault()
-                
-
-               }
-            },
-            mounted(){
-                fetch('Data/users.json')
-                .then((res)=>res.json())
-                .then((json)=>(this.users=json))
-                .catch((err) => (console.log(err)))
-
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Canvas
+		</title>
+        <style>
+            legend{
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                color: purple;
+                background-color: rgba(8, 0, 8, 0.5);
             }
-        }).mount('#contenedor')
-    </script>
-</body>
+            body{
+                background: url("https://gifimage.net/wp-content/uploads/2018/10/background-gif-1920x1080.gif");
+                background-position: center;
+            }
+            label{
+                color: white;
+            }
+            input{
+                border: 2px solid purple;
+                border-radius: 5px;
+            }
+        </style>
+	</head>
+	<body>
+
+		<div id="contenedor">
+			
+			<form>
+				<fieldset>
+					<legend>
+						Datos de acceso
+					</legend>
+
+
+					<label>
+						Correo electrónico 
+					</label>
+					<input type="email" v-model="email" name="" required>
+
+					<br>
+
+					<label>
+						Password
+					</label>
+					<input type="password" v-model="password" name="" required>
+
+					<br>
+
+					<button @click="login">
+						Acceder
+					</button>
+
+				</fieldset>
+			</form>
+
+		</div>
+
+		<script src="https://unpkg.com/vue@3"></script>
+		<script type="text/javascript">
+			const { createApp } = Vue
+
+			const app = createApp({
+				data(){
+					return{ 
+						users:null,
+						email:'',
+						password:''
+					}
+				},
+				methods:{
+					login(e){
+
+						var tmp_mail = this.email
+						var tmp_pwd = this.password
+						
+						var access = this.users.map(function(u){
+
+							if (tmp_mail === u.email) {
+								if (tmp_pwd === u.password) {
+									
+									var tmp_usr = { 
+										name: u.name,
+										username: u.username,
+										email: u.email
+									}  
+
+									localStorage.setItem('user', JSON.stringify(tmp_usr));
+
+									alert("Accesos correctos")
+
+									window.location.href = 'users.html'
+									
+								}
+							}
+						}) 
+
+						alert('Datos incorrectos')
+
+						e.preventDefault()
+					}
+				},
+				mounted(){
+					fetch('Data/users.json')
+					.then((res) => res.json())
+					.then((json) => ( this.users = json ))
+					.catch((err) => ( alert('no data') ))
+				}
+			}).mount('#contenedor')
+
+		</script>
+	</body>
 </html>
+
+
+
+
+
