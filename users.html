@@ -6,6 +6,46 @@
 		<title>
 			datos
 		</title>
+		<style>
+            table{
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                color: purple;
+                background-color: rgba(8, 0, 8, 0.5);
+            }
+            body{
+                background: url("https://gifimage.net/wp-content/uploads/2018/10/background-gif-1920x1080.gif");
+                background-position: center;
+            }
+            label{
+                color: white;
+            }
+            input{
+                border: 2px solid purple;
+                border-radius: 5px;
+            }
+			#delete{
+				background: red;
+			}
+			#edit{
+				background: blue;
+				color: white;
+			}
+			#add{
+				background: green;
+				color: white;
+			}
+			thead{
+				background-size: 10px;
+				padding: 3px;
+				color: aqua;
+			}
+			tbody{
+				color: white;
+			}
+			h1{
+				color: silver;
+			}
+        </style>
 		<style type="text/css">
 			table, th, td {
 			  border: 1px solid black;
@@ -20,7 +60,7 @@
 				Bienvenido {{ user }}    
 			</h1>
 
-			<button @click="onAction = (onAction)?false:true">
+			<button @click="onAction = (onAction)?false:true" id="add">
 				Añadir usuario
 			</button>
 
@@ -75,10 +115,10 @@
 							{{ u.website }}
 						</th> 
 						<th>
-							<button>
+							<button id="edit">
 								Edit
 							</button>
-							<button>
+							<button id="delete">
 								Delete
 							</button>
 						</th>
