@@ -4,208 +4,59 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
-			datos
+			Vue js
 		</title>
+		<!-- ENLAZAR VUE JS -->
+		<script src="https://unpkg.com/vue@3"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<style>
-            table{
-                font-family: Georgia, 'Times New Roman', Times, serif;
-                color: purple;
-                background-color: rgba(8, 0, 8, 0.5);
-            }
-            body{
-                background: url("https://gifimage.net/wp-content/uploads/2018/10/background-gif-1920x1080.gif");
-                background-position: center;
-            }
-            label{
-                color: white;
-            }
-            input{
-                border: 2px solid purple;
-                border-radius: 5px;
-            }
-			#delete{
-				background: red;
-			}
-			#edit{
-				background: blue;
-				color: white;
-			}
-			#add{
-				background: green;
-				color: white;
-			}
-			thead{
-				background-size: 10px;
-				padding: 3px;
-				color: aqua;
-			}
-			tbody{
-				color: white;
-			}
-			h1{
-				color: silver;
-			}
-        </style>
-		<style type="text/css">
-			table, th, td {
+			li {
+				color: black;
 			  border: 1px solid black;
 			}
-		</style>
+		</style>	
 	</head>
 	<body>
-
-		<div id="contenedor">
+		<!-- CREAR UN CONTENEDOR -->
 			
-			<h1>
-				Bienvenido {{ user }}    
-			</h1>
-
-			<button @click="onAction = (onAction)?false:true" id="add">
-				Añadir usuario
-			</button>
-
-			<br>
-
-			<table v-if="onAction == false">
-				<thead>
-					<tr>
-						<th>
-							#
-						</th>
-						<th>
-							Name
-						</th>
-						<th>
-							Username
-						</th>
-						<th>
-							Email
-						</th> 
-						<th>
-							Phone
-						</th>
-						<th>
-							website
-						</th> 
-						<th>
-							Actions
-						</th>
-					</tr>
-				</thead>
-
-				<tbody>
+			<div id="contenedor">
 					
-					<tr v-for="u in users">
-						<th>
-							{{ u.id }}
-						</th>
-						<th>
-							{{ u.name }}
-						</th>
-						<th>
-							{{ u.username }}
-						</th>
-						<th>
-							{{ u.email }}
-						</th> 
-						<th>
-							{{ u.phone }}
-						</th>
-						<th>
-							{{ u.website }}
-						</th> 
-						<th>
-							<button id="edit">
-								Edit
-							</button>
-							<button id="delete">
-								Delete
-							</button>
-						</th>
-					</tr>
-
-				</tbody>
-
-				<tfoot>
-					<tr>
-						<th>
-							#
-						</th>
-						<th>
-							Name
-						</th>
-						<th>
-							Username
-						</th>
-						<th>
-							Email
-						</th> 
-						<th>
-							Phone
-						</th>
-						<th>
-							website
-						</th> 
-						<th>
-							Actions
-						</th>
-					</tr>
-				</tfoot>
-			</table>
-
-			<div v-else>
-				<form>
-					<fieldset>
-						<legend>
-							Datos personales
-						</legend>
-
-						<label>
-							dato uno
-						</label>
-						<input type="text" name="">
+				<h1>
+					Lista de peliculas
+				</h1>
+				
+				<div v-for="movie in movies"  >
+					<h3>{{movie}}</h3>
 
 
-						<button>
-							Guardar
-						</button>
-						<button>
-							Cancelar
-						</button>
-					</fieldset>
-				</form>
-			</div>
+				</div>
 
-		</div>
+			</div> 
 
-		<script src="https://unpkg.com/vue@3"></script>
+	
+
 		<script type="text/javascript">
-			const { createApp } = Vue
+			const { createApp } = Vue;  
 
 			const app = createApp({
 				data(){
-					return{ 
-						user:'',
-						users:null, 
-						onAction:false
+					return {
+						movies:[]
+						
 					}
 				},
-				methods:{
-					 
+				methods: {
+							
+				
+				
 				},
 				mounted(){
-
-					var usr = localStorage.getItem('user');
-					usr = JSON.parse(usr);    
-					this.user = usr.name;
-
-					fetch('Data/users.json')
-					.then((res) => res.json())
-					.then((json) => ( this.users = json ))
-					.catch((err) => ( alert('no data') ))
+					fetch('https://api.themoviedb.org/3/movie/popular?api_key=49f23bf18b145e04393adde83b636f99&language=es-MX')
+					  .then((res) => res.json())
+					  .then((json) => ( this.movies = json ))
+					  .catch((err) => ( console.log(err) ))
 				}
 			}).mount('#contenedor')
-
 		</script>
 	</body>
 </html>
