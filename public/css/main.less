@@ -1,0 +1,28 @@
+.setBackgroundColor(@color){
+    background-color: @color;
+}
+.container{
+    fieldset{
+
+        form{
+            .setBackgroundColor(@bgColor);
+            label{
+                margin-top: 10px;
+                background-color:@bgColor;
+                display: block;
+            }
+            input{
+                display: block;
+                width: 50%;
+            }
+            button{
+                display: block;
+                background-color: @BTNbackground;
+                color: @BTNcolor;
+            }
+        }
+    }
+}
+@bgColor:#2E8BC0;
+@BTNcolor:#251C23;
+@BTNbackground: #740366;
