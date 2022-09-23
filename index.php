@@ -5,29 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        
-            <fieldset>
-                <form >
-                <legend>
-                    acceso al panel
-                </legend>
-                <label for="">
-                    correo electronico
-                </label>
-                <input type="email" name="" id="">
-                <label for="">
-                    contraseña
-                </label>
-                <input type="password" value="">
-                <button type="submit">acceder</button>
+    <div class="container recolor">
+        <section>
+            
+            <div class="col-5 text-center position-absolute top-50 start-50 translate-middle">
+                <form action="">
+                    <label for="" class="fs-2 fst-italic">Correo</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                        <input type="text" class="form-control" placeholder="correo electronico" aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                    <label for="" class="fs-2 fst-italic">Contraseña</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">**</span>
+                        <input type="text" class="form-control" placeholder="contraseña" aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                      <button type="submit" class="btn btn-dark">aceptar</button>
+                    
                 </form>
-            </fieldset>
+              
+              </div>
 
-       
-    </div>
+        </section>
+        
+      </div>
 </body>
 </html>
