@@ -3,26 +3,74 @@
 	<head>
 		<?php include '../layouts/head.template.php'; ?>
 	</head>
-  <style>
-    .btn-warning{
-      background-color: #8F3A84 !important;
-    }
-    .btn-primary{
-      background-color: #CD05A6 !important;
-
-    }
-  
-
-
-  </style>
 	<body>
-    <?php include '../layouts/nav.template.php'; ?>
+
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+		  <div class="container-fluid">
+		    
+		    <a class="navbar-brand" href="#">
+		      <img src="../public/img/logo.png" alt="Bootstrap" width="30" height="24">
+		    </a>
+
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		         
+		        <li class="nav-item">
+		          <a class="nav-link" href="#">Productos</a>
+		        </li>
+		        <li class="nav-item dropdown">
+		          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		            Dropdown
+		          </a>
+		          <ul class="dropdown-menu">
+		            <li><a class="dropdown-item" href="#">Action</a></li>
+		            <li><a class="dropdown-item" href="#">Another action</a></li>
+		            <li><hr class="dropdown-divider"></li>
+		            <li><a class="dropdown-item" href="#">Something else here</a></li>
+		          </ul>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link disabled">Disabled</a>
+		        </li>
+		      </ul> 
+		    </div>
+		  </div>
+		</nav>
+		<!-- NAVBAR -->
 
 		<div class="container-fluid">
 			
 			<div class="row">
 				
-				<?php include '../layouts/sidebar.template.php' ?>
+				<!-- SIDEBAR -->
+				<div class="col-sm-2 d-sm-block d-none bg-light sidebar">
+					
+					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+			           
+			          <li class="nav-item">
+			            <a class="nav-link" href="#">Link</a>
+			          </li>
+			          <li class="nav-item dropdown">
+			            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			              Dropdown
+			            </a>
+			            <ul class="dropdown-menu dropdown-menu-dark">
+			              <li><a class="dropdown-item" href="#">Action</a></li>
+			              <li><a class="dropdown-item" href="#">Another action</a></li>
+			              <li>
+			                <hr class="dropdown-divider">
+			              </li>
+			              <li><a class="dropdown-item" href="#">Something else here</a></li>
+			            </ul>
+			          </li>
+			        </ul>	
+
+				</div>
+				<!-- SIDEBAR -->
 
 				<div class="col-md-10 col-lg-10 col-sm-12">
 
@@ -34,9 +82,7 @@
 								</label>
 							</div>
 							<div class="col">
-								<button data-bs-toggle="modal" data-bs-target="#addProductModal" class=" float-end btn btn-primary">
-									Añadir producto
-								</button>
+								 
 							</div>
 						</div> 
 					</section>
@@ -45,12 +91,12 @@
 						
 						<div class="row">
 							
-							<?php for ($i=0; $i < 12; $i++): ?>
+							 
 
 							<div class="col-md-4 col-sm-12"> 
 
 								<div class="card mb-2">
-								  <img src="../public/img/product.png" class="card-img-top" alt="...">
+								  <img src="../public/img/logo.png" class="card-img-top" alt="...">
 								  <div class="card-body">
 								    <h5 class="card-title">Card title</h5>
 								    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -62,10 +108,7 @@
 									    </a>
 									    <a onclick="eliminar(this)" href="#" class="btn btn-danger mb-1 col-6">
 									    	Eliminar
-									    </a>
-									    <a href="details.php" class="btn btn-info col-12">
-									    	Detalles
-									    </a>
+									    </a> 
 								    </div>
 
 								  </div>
@@ -73,7 +116,7 @@
 
 							</div>
 
-							<?php endfor; ?>
+							
 
 						</div>
 
@@ -148,3 +191,5 @@
 		</script>
 	</body>
 </html>
+
+
