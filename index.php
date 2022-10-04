@@ -12,18 +12,19 @@
         <section>
             
             <div class="col-5 text-center position-absolute top-50 start-50 translate-middle">
-                <form action="">
+                <form action="app/AuthController.php" method="post">
                     <label for="" class="fs-2 fst-italic">Correo</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="correo electronico" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" placeholder="correo electronico" aria-label="Username" aria-describedby="basic-addon1" name="email" required>
                       </div>
                     <label for="" class="fs-2 fst-italic">Contraseña</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">**</span>
-                        <input type="text" class="form-control" placeholder="contraseña" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="password" class="form-control" placeholder="contraseña" aria-label="Username" aria-describedby="basic-addon1" name="password" required>
                       </div>
                       <button type="submit" class="btn btn-dark">aceptar</button>
+                      <input type="hidden" name="action" value="access">
                     
                 </form>
               
