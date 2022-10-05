@@ -1,175 +1,132 @@
-<?php 
+<?php
+$slug = $_GET['slug'];
+
 include '../app/ProductsController.php';
-$productsContoller=new ProductsController();
-$products=$productsContoller->getProducts();
-
+$productsController = new ProductsController();
+//$products=$productsController->getProducts();
+$product = $productsController->getProductBySlug($slug);
 ?>
-
+<!DOCTYPE html>
 <html>
-	<!DOCTYPE html>
 
 <head>
-	<?php include '../layouts/head.template.php'; ?>
+	<?php
+	include('../layout/head.template.php');
+	?>
 </head>
-<style>
-	.btn-warning {
-		background-color: #8F3A84 !important;
-	}
-
-	.btn-primary {
-		background-color: #CD05A6 !important;
-
-	}
-	#productName{
-		color: #CD05A6;
-	}
-	#addImage{
-		color: #880E4F;
-	}
-</style>
 
 <body>
-	<?php include '../layouts/nav.template.php'; ?>
+
+	<!-- NAVBAR -->
+	<?php
+	include('../layout/navbar.template.php');
+	?>
+	<!-- NAVBAR -->
 
 	<div class="container-fluid">
 
 		<div class="row">
 
-			<?php include '../layouts/sidebar.template.php' ?>
-			
+			<!-- SIDEBAR -->
+			<?php
+			include('../layout/sidebar.template.php');
+			?>
+			<!-- SIDEBAR -->
+
 			<div class="col-md-10 col-lg-10 col-sm-12">
 
-				<section>
-					<div class="row bg-light m-2">
-						<div class="col">
-							<label>
-								products
-							</label>
-						</div>
-						<div class="col">
-							<button data-bs-toggle="modal" data-bs-target="#addProductModal" class=" float-end btn btn-primary">
-								add products
-							</button>
-						</div>
-					</div>
-				</section>
+				<div class="col-md-10 col-lg-10 col-sm-12">
 
-				<section>
-
-					<div class="row">
-
-						<?php if  (isset($products)&& count($products)) : ?>
-							<?php foreach($products as $product): ?>
-
-							<div class="col-md-4 col-sm-12">
-
-								<div class="card mb-2">
-									<img src="<?= $product -> cover ?>" class="card-img-top" alt="...">
-									<div class="card-body">
-										<h5 class="card-title" id="productName"><?= $product -> name ?></h5>
-										<h6 class="card-subtitle mb-2 text-muted" id="productDescription"><?= $product -> description ?></h6>
-										<p class="card-text"><?= $product -> features ?></p>
-
-										<div class="row">
-											<a data-bs-toggle="modal" data-bs-target="#addProductModal" href="#" class="btn btn-warning mb-1 col-6">
-												EDIT
-											</a>
-											<a onclick="eliminar(this)" href="#" class="btn btn-danger mb-1 col-6">
-												DELETE
-											</a>
-											<a href="details.php" class="btn btn-info col-12">
-												DETAILS
-											</a>
-										</div>
-
-									</div>
-								</div>
-
+					<section>
+						<div class="row bg-light m-2">
+							<div class="col">
+								<label>
+									/<a href="index.php">Products</a>/<?= $product->slug ?>
+								</label>
 							</div>
 
-						<?php endforeach; ?>
-						<?php endif; ?>
+						</div>
+					</section>
+					<div class="container mt-5 mb-5">
+						<div class="row d-flex justify-content-center">
+							<div class="col-md-10">
+								<div class="card">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="images p-3">
+												<div class="text-center p-4"> <img id="main-image" src="<?= $product->cover ?>" width="250" /> </div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="product p-4">
+												<div class="d-flex justify-content-between align-items-center">
+												</div>
+												<div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand"><?= $product->brand->name ?> </span>
+													<h5 class="text-uppercase"><?= $product->name ?></h5>
 
+												</div>
+												<p class="about"><?= $product->description ?></p>
+												<h6 class="text-uppercase">Caracteristicas</h5>
+													<p class="about"><?= $product->features ?></p>
+
+													<h5 class="text">Categorias</h5>
+													<?php if (isset($product->categories) && count($product->categories)) : ?>
+														<?php foreach ($product->categories as $category) : ?>
+
+															<a class="btn btn-primary mb-3" href="categorias.php?category=<?= $category->name ?>" role="button"><?= $category->name ?></a>
+														<?php endforeach; ?>
+													<?php endif; ?>
+
+													<h5 class="text">Etiquetas</h5>
+													<?php if (isset($product->tags) && count($product->tags)) : ?>
+														<?php foreach ($product->tags as $tag) : ?>
+
+															<a class="btn btn-primary mb-3" href="etiquetas.php?tag=<?= $tag->name ?>" role="button"><?= $tag->name ?></a>
+														<?php endforeach; ?>
+													<?php endif; ?>
+
+													<div class="row">
+														<a data-bs-toggle="modal" data-bs-target="#addProductModal" href="#" class="btn btn-warning mb-1 me-1 col-5">
+															Editar
+														</a>
+														<a onclick="eliminar(this)" href="#" class="btn btn-danger mb-1 ms-1 col-5">
+															Eliminar
+														</a>
+													</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-
-				</section>
-
-
-			</div>
-
-		</div>
-
-	</div>
-
-	<!-- Modal -->
-	<!-- action addProduct  -->
-	<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-
-				<form action="addProduct" method="post">
-
-					<div class="modal-body align-text-bottom">
-						
-					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="name" required>
-					<br>
-					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="slug" required>
-					<br>
-					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="description" required>
-					<br>
-					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="features" required>
-					<br>
-					<input type="" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="brand" required>
-					<br>
-					<input class="form-control" type="file" id="addImage" name="addImage" accept="image/*" />
-						
-
-					
-
-						
-
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-							Close
-						</button>
-						<button type="submit" class="btn btn-primary">
-							Save changes
-						</button>
-						<input type="hidden" name="action" value="done">
-					</div>
-
-				</form>
-
 			</div>
 		</div>
-	</div>
 
-	<?php include '../layouts/scripts.template.php' ?>
-	<script type="text/javascript">
-		function eliminar(target) {
-			swal({
-					title: "Are you sure?",
-					text: "Once deleted, you will not be able to recover this imaginary file!",
-					icon: "warning",
-					buttons: true,
-					dangerMode: true,
-				})
-				.then((willDelete) => {
-					if (willDelete) {
-						swal("Poof! Your imaginary file has been deleted!", {
-							icon: "success",
-						});
-					} else {
-						swal("Your imaginary file is safe!");
-					}
-				});
-		}
-	</script>
+		<?php
+		include('../layout/scripts.template.php');
+		?>
+		<script type="text/javascript">
+			function eliminar(target) {
+				swal({
+						title: "Are you sure?",
+						text: "Once deleted, you will not be able to recover this imaginary file!",
+						icon: "warning",
+						buttons: true,
+						dangerMode: true,
+					})
+					.then((willDelete) => {
+						if (willDelete) {
+							swal("Poof! Your imaginary file has been deleted!", {
+								icon: "success",
+							});
+						} else {
+							swal("Your imaginary file is safe!");
+						}
+					});
+			}
+		</script>
 </body>
+
 </html>
