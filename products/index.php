@@ -60,9 +60,9 @@ $products=$productsContoller->getProducts();
 								<div class="card mb-2">
 									<img src="<?= $product -> cover ?>" class="card-img-top" alt="...">
 									<div class="card-body">
-										<h5 class="card-title"><?= $product -> cover ?></h5>
-										<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-										<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+										<h5 class="card-title"><?= $product -> name ?></h5>
+										<h6 class="card-subtitle mb-2 text-muted"><?= $product -> description ?></h6>
+										<p class="card-text"><?= $product -> features ?></p>
 
 										<div class="row">
 											<a data-bs-toggle="modal" data-bs-target="#addProductModal" href="#" class="btn btn-warning mb-1 col-6">
@@ -113,7 +113,7 @@ $products=$productsContoller->getProducts();
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="slug" required>
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="description" required>
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="features" required>
-					<input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="brand" required>
+					<input type="" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="brand" required>
 						
 
 					
