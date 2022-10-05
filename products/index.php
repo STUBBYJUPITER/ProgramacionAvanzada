@@ -37,12 +37,12 @@ $products=$productsContoller->getProducts();
 					<div class="row bg-light m-2">
 						<div class="col">
 							<label>
-								Productos
+								products
 							</label>
 						</div>
 						<div class="col">
 							<button data-bs-toggle="modal" data-bs-target="#addProductModal" class=" float-end btn btn-primary">
-								Añadir producto
+								add products
 							</button>
 						</div>
 					</div>
@@ -96,24 +96,29 @@ $products=$productsContoller->getProducts();
 	</div>
 
 	<!-- Modal -->
+	<!-- action addProduct  -->
 	<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 
-				<form>
+				<form action="addProduct" method="post">
 
-					<div class="modal-body">
+					<div class="modal-body align-text-bottom">
+						
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="name" required>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="slug" required>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="description" required>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="features" required>
+					<input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="brand" required>
+						
 
-						<?php for ($i = 0; $i < 6; $i++) : ?>
-							<div class="input-group mb-3">
-								<span class="input-group-text" id="basic-addon1">@</span>
-								<input required type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-							</div>
-						<?php endfor; ?>
+					
+
+						
 
 					</div>
 
