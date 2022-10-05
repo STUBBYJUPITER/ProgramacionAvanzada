@@ -20,6 +20,12 @@ $products=$productsContoller->getProducts();
 		background-color: #CD05A6 !important;
 
 	}
+	#productName{
+		color: #CD05A6;
+	}
+	#addImage{
+		color: #880E4F;
+	}
 </style>
 
 <body>
@@ -60,19 +66,19 @@ $products=$productsContoller->getProducts();
 								<div class="card mb-2">
 									<img src="<?= $product -> cover ?>" class="card-img-top" alt="...">
 									<div class="card-body">
-										<h5 class="card-title"><?= $product -> name ?></h5>
-										<h6 class="card-subtitle mb-2 text-muted"><?= $product -> description ?></h6>
+										<h5 class="card-title" id="productName"><?= $product -> name ?></h5>
+										<h6 class="card-subtitle mb-2 text-muted" id="productDescription"><?= $product -> description ?></h6>
 										<p class="card-text"><?= $product -> features ?></p>
 
 										<div class="row">
 											<a data-bs-toggle="modal" data-bs-target="#addProductModal" href="#" class="btn btn-warning mb-1 col-6">
-												Editar
+												EDIT
 											</a>
 											<a onclick="eliminar(this)" href="#" class="btn btn-danger mb-1 col-6">
-												Eliminar
+												DELETE
 											</a>
 											<a href="details.php" class="btn btn-info col-12">
-												Detalles
+												DETAILS
 											</a>
 										</div>
 
@@ -110,10 +116,16 @@ $products=$productsContoller->getProducts();
 					<div class="modal-body align-text-bottom">
 						
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="name" required>
+					<br>
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="slug" required>
+					<br>
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="description" required>
+					<br>
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="features" required>
+					<br>
 					<input type="" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="brand" required>
+					<br>
+					<input class="form-control" type="file" id="addImage" name="addImage" accept="image/*" />
 						
 
 					
@@ -129,6 +141,7 @@ $products=$productsContoller->getProducts();
 						<button type="submit" class="btn btn-primary">
 							Save changes
 						</button>
+						<input type="hidden" name="action" value="done">
 					</div>
 
 				</form>
