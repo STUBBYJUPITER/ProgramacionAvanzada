@@ -89,11 +89,15 @@ $products=$productsContoller->getProducts();
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="slug" required>
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="description" required>
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="features" required>
-					<select name="brand_id" required class="form-control">
-				
+				<select name="brand_id" required class="form-control">
+				<?php foreach($brands as $brand):?>
+								<option value="<?=$brand->id?>">
+									<?= $brand->name?>
+								</option>
+							<?php endforeach; ?>
 
 
-					</select>
+				</select>
 					<input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="brand" required>
 					<input type="" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="brand" required>
 
@@ -125,7 +129,18 @@ $products=$productsContoller->getProducts();
 				})
 				.then((willDelete) => {
 					if (willDelete) {
-						
+							var bodyFormData = new FormData();
+						bodyFormData.append('id', id);
+						bodyFormData.append('action', 'remove'); 
+
+						axios.post('../app/ProductsController.php', bodyFormData)
+						.then(function (response) {
+							console.log(response);
+						})
+						.catch(function (error) {
+							console.log(error);
+						});
+							
 						swal("Poof! Your imaginary file has been deleted!", {
 							icon: "success",
 						});

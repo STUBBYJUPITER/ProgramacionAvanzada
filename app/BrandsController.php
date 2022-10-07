@@ -1,4 +1,5 @@
 <?php 
+include_once "config.php";
 class BrandController{
     public function getBrands(){
         $curl = curl_init();
@@ -25,7 +26,7 @@ class BrandController{
 
             return $response->data;
         } else {
-            echo"fatal error";
+            return array();
         }
 
 

@@ -1,5 +1,6 @@
 <?php
-session_start();
+include_once "config.php";
+
 if (isset($_POST["addProduct"])) {
     switch ($_POST["addProduct"]) {
         case 'done':
@@ -110,7 +111,7 @@ class ProductsController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products/slug/' . $product_slug,
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products/slug/'.$product_slug,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -132,7 +133,7 @@ class ProductsController
 
             return $response->data;
         } else {
-            header("location:../products/error.php");
+            return array();
         }
     }
     public function deleteProduct($id){

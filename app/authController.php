@@ -1,15 +1,22 @@
 <?php 
+include_once "config.php";
+
         if(isset ($_POST["action"])){
-            switch($_POST["action"]){
-                case 'access':
-                    $email = strip_tags($_POST['email']);
-                    $password= strip_tags($_POST['password']);
-
-                    $authController= new AuthController();
-                    $authController->Loggin($email,$password);
-
-                break;
+            if(isset($_POST['super_token'] ) && $_POST['super_token'] == $_SESSION['super_token']){
+                switch($_POST["action"]){
+                    case 'access':
+                        $email = strip_tags($_POST['email']);
+                        $password= strip_tags($_POST['password']);
+    
+                        $authController= new AuthController();
+                        $authController->Loggin($email,$password);
+    
+                    break;
+                }
+                
             }
+
+
         }
 
         class AuthController{
@@ -41,9 +48,9 @@
                     $_SESSION['role']= $response->data->role;
                     $_SESSION['token']= $response->data->token;
 
-                    header("location:../products/index.php");
+                    header("location:".BASE_PATH."products/index.php");
                 }else{
-                    header("Location:../products/error.php");
+                    header("Location:".BASE_PATH."?error");
 
                 }
 
